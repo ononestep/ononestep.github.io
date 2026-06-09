@@ -135,12 +135,43 @@
                 gap: 20px;
             }
         }
+
+        /* ========== 大图弹窗样式 ========== */
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0,0,0,0.9);
+            display: none;
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+        }
+        .lightbox.show {
+            display: flex;
+        }
+        .lightbox-img {
+            max-width: 90%;
+            max-height: 90vh;
+            object-fit: contain;
+        }
+        .lightbox-close {
+            position: absolute;
+            top: 25px;
+            right: 40px;
+            color: #fff;
+            font-size: 40px;
+            cursor: pointer;
+            user-select: none;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <!-- 同目录直接写index.html -->
             <a href="index.html" class="logo">OnOneStep</a>
             <a href="index.html" class="back-home">← 返回首页</a>
         </header>
@@ -153,29 +184,29 @@
         </div>
 
         <div class="portfolio-grid">
-            <!-- 图片路径：根目录下的images文件夹 -->
-            <div class="work-card">
+            <!-- 每张卡片加 data-src 存大图地址 -->
+            <div class="work-card" data-src="images/work1.png">
                 <img src="images/work1.png" alt="商业海报设计" class="work-img">
                 <div class="work-overlay">
                     <h3 class="work-title">商业海报系列</h3>
                     <p class="work-category">平面设计</p>
                 </div>
             </div>
-            <div class="work-card">
+            <div class="work-card" data-src="images/work2.png">
                 <img src="images/work2.png" alt="品牌视觉设计" class="work-img">
                 <div class="work-overlay">
                     <h3 class="work-title">茶饮品牌升级</h3>
                     <p class="work-category">平面设计</p>
                 </div>
             </div>
-            <div class="work-card">
+            <div class="work-card" data-src="images/work3.png">
                 <img src="images/work3.png" alt="APP界面设计" class="work-img">
                 <div class="work-overlay">
                     <h3 class="work-title">生活方式APP</h3>
                     <p class="work-category">UI设计</p>
                 </div>
             </div>
-            <div class="work-card">
+            <div class="work-card" data-src="images/work4.png">
                 <img src="images/work4.png" alt="插画作品" class="work-img">
                 <div class="work-overlay">
                     <h3 class="work-title">城市系列插画</h3>
@@ -189,13 +220,58 @@
         </footer>
     </div>
 
+    <!-- 大图弹窗容器（页面最底部） -->
+    <div class="lightbox" id="lightbox">
+        <span class="lightbox-close" id="closeBtn">×</span>
+        <img src="" alt="大图预览" class="lightbox-img" id="bigImg">
+    </div>
+
     <script>
+        // 分类筛选
         const categoryBtns = document.querySelectorAll('.category-btn');
         categoryBtns.forEach(btn => {
             btn.addEventListener('click', function() {
                 categoryBtns.forEach(b => b.classList.remove('active'));
                 this.classList.add('active');
             });
+        });
+
+        // ========== 点击弹出大图逻辑 ==========
+        const lightbox = document.getElementById('lightbox');
+        const bigImg = document.getElementById('bigImg');
+        const closeBtn = document.getElementById('closeBtn');
+        const workCards = document.querySelectorAll('.work-card');
+
+        // 点击卡片打开大图
+        workCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const imgUrl = card.getAttribute('data-src');
+                bigImg.src = imgUrl;
+                lightbox.classList.add('show');
+                document.body.style.overflow = 'hidden'; // 弹窗时禁止页面滚动
+            });
+        });
+
+        // 点关闭按钮关闭
+        closeBtn.addEventListener('click', () => {
+            lightbox.classList.remove('show');
+            document.body.style.overflow = '';
+        });
+
+        // 点黑色空白区域关闭
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                lightbox.classList.remove('show');
+                document.body.style.overflow = '';
+            }
+        });
+
+        // 按键盘ESC关闭
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && lightbox.classList.contains('show')) {
+                lightbox.classList.remove('show');
+                document.body.style.overflow = '';
+            }
         });
     </script>
 </body>
