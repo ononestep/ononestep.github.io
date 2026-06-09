@@ -120,6 +120,37 @@
         .work-card:hover .work-overlay {
             opacity: 1;
         }
+        /* 未完待续模块 */
+        .coming-soon {
+            grid-column: 1 / -1; /* 占满整行 */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 80px 20px;
+            border: 2px dashed #eee;
+            border-radius: 12px;
+        }
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid #eee;
+            border-top: 3px solid #000;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+        .coming-soon-text {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
         footer {
             text-align: center;
             padding: 40px 0;
@@ -136,7 +167,7 @@
             }
         }
 
-        /* ========== 大图弹窗样式 ========== */
+        /* 大图弹窗样式 */
         .lightbox {
             position: fixed;
             top: 0;
@@ -184,7 +215,7 @@
         </div>
 
         <div class="portfolio-grid">
-            <!-- 每张卡片加 data-src 存大图地址 -->
+            <!-- 作品1：商业海报系列 -->
             <div class="work-card" data-src="images/work1.png">
                 <img src="images/work1.png" alt="商业海报设计" class="work-img">
                 <div class="work-overlay">
@@ -192,26 +223,29 @@
                     <p class="work-category">平面设计</p>
                 </div>
             </div>
+
+            <!-- 作品2：创意海报（已修改） -->
             <div class="work-card" data-src="images/work2.png">
-                <img src="images/work2.png" alt="品牌视觉设计" class="work-img">
+                <img src="images/work2.png" alt="创意海报" class="work-img">
                 <div class="work-overlay">
-                    <h3 class="work-title">茶饮品牌升级</h3>
+                    <h3 class="work-title">创意海报</h3>
                     <p class="work-category">平面设计</p>
                 </div>
             </div>
+
+            <!-- 作品3：其他作品（已修改） -->
             <div class="work-card" data-src="images/work3.png">
-                <img src="images/work3.png" alt="APP界面设计" class="work-img">
+                <img src="images/work3.png" alt="其他作品" class="work-img">
                 <div class="work-overlay">
-                    <h3 class="work-title">生活方式APP</h3>
-                    <p class="work-category">UI设计</p>
+                    <h3 class="work-title">其他作品</h3>
+                    <p class="work-category">平面设计</p>
                 </div>
             </div>
-            <div class="work-card" data-src="images/work4.png">
-                <img src="images/work4.png" alt="插画作品" class="work-img">
-                <div class="work-overlay">
-                    <h3 class="work-title">城市系列插画</h3>
-                    <p class="work-category">插画</p>
-                </div>
+
+            <!-- 未完待续模块（新增） -->
+            <div class="coming-soon">
+                <div class="loading-spinner"></div>
+                <div class="coming-soon-text">未完待续</div>
             </div>
         </div>
 
@@ -220,7 +254,7 @@
         </footer>
     </div>
 
-    <!-- 大图弹窗容器（页面最底部） -->
+    <!-- 大图弹窗容器 -->
     <div class="lightbox" id="lightbox">
         <span class="lightbox-close" id="closeBtn">×</span>
         <img src="" alt="大图预览" class="lightbox-img" id="bigImg">
@@ -236,29 +270,27 @@
             });
         });
 
-        // ========== 点击弹出大图逻辑 ==========
+        // 点击弹出大图逻辑
         const lightbox = document.getElementById('lightbox');
         const bigImg = document.getElementById('bigImg');
         const closeBtn = document.getElementById('closeBtn');
         const workCards = document.querySelectorAll('.work-card');
 
-        // 点击卡片打开大图
         workCards.forEach(card => {
             card.addEventListener('click', () => {
                 const imgUrl = card.getAttribute('data-src');
                 bigImg.src = imgUrl;
                 lightbox.classList.add('show');
-                document.body.style.overflow = 'hidden'; // 弹窗时禁止页面滚动
+                document.body.style.overflow = 'hidden';
             });
         });
 
-        // 点关闭按钮关闭
+        // 关闭方式
         closeBtn.addEventListener('click', () => {
             lightbox.classList.remove('show');
             document.body.style.overflow = '';
         });
 
-        // 点黑色空白区域关闭
         lightbox.addEventListener('click', (e) => {
             if (e.target === lightbox) {
                 lightbox.classList.remove('show');
@@ -266,7 +298,6 @@
             }
         });
 
-        // 按键盘ESC关闭
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && lightbox.classList.contains('show')) {
                 lightbox.classList.remove('show');
