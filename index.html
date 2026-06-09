@@ -44,28 +44,33 @@
             display: inline-block;
         }
 
-        /* A 字母上半部分黑色遮罩 */
+        /* A 字母上半部分正三角形遮罩 */
         .a-mask {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
-            height: 50%; /* 只覆盖上半部分 */
+            height: 100%;
+            /* 标准正三角形：顶点在上，底边在下，正好覆盖A字母上半部分 */
+            clip-path: polygon(50% 0%, 0% 55%, 100% 55%);
             background-color: #000000;
             overflow: hidden;
             display: flex;
             justify-content: center;
-            align-items: flex-end; /* 文字靠下对齐 */
-            padding-bottom: 2%;
+            align-items: center;
+            /* 微调三角形位置，完美对齐A字母上半部分 */
+            transform: translateY(-1%);
         }
 
-        /* 遮罩内的 click 文字 */
+        /* 遮罩内的 click 文字 - 完全在三角形内部 */
         .click-text {
             color: #ffffff;
-            font-size: 0.15em; /* 相对于 A 字母的大小 */
+            font-size: 0.12em; /* 相对于A字母的大小，确保完全在三角形内 */
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.1em;
+            letter-spacing: 0.15em;
+            /* 文字向上微调，正好在三角形中心 */
+            transform: translateY(-35%);
         }
 
         /* 鼠标悬停效果 */
@@ -76,7 +81,7 @@
 
         .start-container:hover .click-text {
             color: #ffffff;
-            transform: scale(1.05);
+            transform: translateY(-35%) scale(1.05);
             transition: transform 0.3s ease;
         }
     </style>
