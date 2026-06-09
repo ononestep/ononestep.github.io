@@ -1,11 +1,103 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>我的个人主页</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Onestep | Design Portfolio</title>
+    <style>
+        /* 全局重置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* 全屏白底 */
+        body {
+            background-color: #ffffff;
+            font-family: 'Arial Black', 'Helvetica Bold', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        /* START 文字容器 */
+        .start-container {
+            position: relative;
+            cursor: pointer;
+        }
+
+        /* 基础 START 文字样式 */
+        .start-text {
+            font-size: 20vw; /* 响应式超大字号，随屏幕宽度变化 */
+            font-weight: 900;
+            color: #000000;
+            letter-spacing: -0.05em; /* 字母紧凑一点更好看 */
+            user-select: none; /* 禁止选中文字 */
+        }
+
+        /* 特殊处理 A 字母 */
+        .letter-a {
+            position: relative;
+            display: inline-block;
+        }
+
+        /* A 字母上半部分黑色遮罩 */
+        .a-mask {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 50%; /* 只覆盖上半部分 */
+            background-color: #000000;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end; /* 文字靠下对齐 */
+            padding-bottom: 2%;
+        }
+
+        /* 遮罩内的 click 文字 */
+        .click-text {
+            color: #ffffff;
+            font-size: 0.15em; /* 相对于 A 字母的大小 */
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        /* 鼠标悬停效果 */
+        .start-container:hover .a-mask {
+            background-color: #333333;
+            transition: background-color 0.3s ease;
+        }
+
+        .start-container:hover .click-text {
+            color: #ffffff;
+            transform: scale(1.05);
+            transition: transform 0.3s ease;
+        }
+    </style>
 </head>
 <body>
-    <h1>欢迎来到我的免费网站</h1>
-    <p>这是用GitHub Pages搭建的，完全免费</p>
+    <div class="start-container" id="startButton">
+        <div class="start-text">
+            ST<span class="letter-a">
+                A
+                <div class="a-mask">
+                    <span class="click-text">click</span>
+                </div>
+            </span>RT
+        </div>
+    </div>
+
+    <script>
+        // 点击跳转到主页面
+        document.getElementById('startButton').addEventListener('click', function() {
+            window.location.href = 'main.html';
+        });
+    </script>
 </body>
 </html>
