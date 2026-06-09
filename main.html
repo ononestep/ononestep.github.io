@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Onestep | 设计作品集</title>
+    <style>
+        /* 全局重置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* 全局样式 - 与起始页统一 */
+        body {
+            background-color: #ffffff;
+            font-family: 'Arial Black', 'Helvetica Neue Bold', sans-serif;
+            color: #000000;
+            line-height: 1.6;
+        }
+
+        /* 容器 */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* 顶部导航 */
+        header {
+            padding: 40px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 60px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 900;
+            text-decoration: none;
+            color: #000000;
+        }
+
+        .back-home {
+            text-decoration: none;
+            color: #666;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: color 0.3s ease;
+        }
+
+        .back-home:hover {
+            color: #000000;
+        }
+
+        /* 作品分类 */
+        .categories {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 60px;
+            flex-wrap: wrap;
+        }
+
+        .category-btn {
+            background: none;
+            border: none;
+            font-family: inherit;
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #999;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .category-btn.active,
+        .category-btn:hover {
+            color: #000000;
+        }
+
+        /* 作品网格 */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 40px;
+            margin-bottom: 80px;
+        }
+
+        /* 作品卡片 */
+        .work-card {
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            aspect-ratio: 4/3; /* 统一卡片比例 */
+        }
+
+        .work-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .work-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .work-title {
+            color: #ffffff;
+            font-size: 1.5rem;
+            font-weight: 900;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .work-category {
+            color: #cccccc;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        /* 悬停效果 */
+        .work-card:hover .work-img {
+            transform: scale(1.05);
+        }
+
+        .work-card:hover .work-overlay {
+            opacity: 1;
+        }
+
+        /* 页脚 */
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            border-top: 1px solid #eee;
+            color: #999;
+            font-size: 0.85rem;
+        }
+
+        /* 响应式适配 */
+        @media (max-width: 768px) {
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .categories {
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 顶部导航 -->
+        <header>
+            <a href="/" class="logo">Onestep</a>
+            <a href="/" class="back-home">← 返回首页</a>
+        </header>
+
+        <!-- 作品分类 -->
+        <div class="categories">
+            <button class="category-btn active">全部</button>
+            <button class="category-btn">平面设计</button>
+            <button class="category-btn">UI设计</button>
+            <button class="category-btn">插画</button>
+        </div>
+
+        <!-- 作品网格 -->
+        <div class="portfolio-grid">
+            <!-- 作品卡片1 -->
+            <div class="work-card">
+                <img src="images/work1.jpg" alt="商业海报设计" class="work-img">
+                <div class="work-overlay">
+                    <h3 class="work-title">商业海报系列</h3>
+                    <p class="work-category">平面设计</p>
+                </div>
+            </div>
+
+            <!-- 作品卡片2 -->
+            <div class="work-card">
+                <img src="images/work2.jpg" alt="品牌视觉设计" class="work-img">
+                <div class="work-overlay">
+                    <h3 class="work-title">茶饮品牌升级</h3>
+                    <p class="work-category">平面设计</p>
+                </div>
+            </div>
+
+            <!-- 作品卡片3 -->
+            <div class="work-card">
+                <img src="images/work3.jpg" alt="APP界面设计" class="work-img">
+                <div class="work-overlay">
+                    <h3 class="work-title">生活方式APP</h3>
+                    <p class="work-category">UI设计</p>
+                </div>
+            </div>
+
+            <!-- 作品卡片4 -->
+            <div class="work-card">
+                <img src="images/work4.jpg" alt="插画作品" class="work-img">
+                <div class="work-overlay">
+                    <h3 class="work-title">城市系列插画</h3>
+                    <p class="work-category">插画</p>
+                </div>
+            </div>
+
+            <!-- 复制上面的作品卡片代码，添加更多作品 -->
+        </div>
+
+        <!-- 页脚 -->
+        <footer>
+            <p>© 2026 Onestep Design. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        // 分类筛选功能（基础版）
+        const categoryBtns = document.querySelectorAll('.category-btn');
+        
+        categoryBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                // 移除所有按钮的active类
+                categoryBtns.forEach(b => b.classList.remove('active'));
+                // 给当前点击的按钮添加active类
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
